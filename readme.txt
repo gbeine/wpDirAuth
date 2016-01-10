@@ -2,19 +2,12 @@
 Contributors: gilzow, stephdau, apokalyptik
 Tags: login, authentication, directory, ldap, ldaps
 Requires at least: 2.2
-Tested up to: 4.0
-Stable tag: 1.7.6
+Tested up to: 4.3.1
+Stable tag: 1.7.9
 WordPress directory authentication plugin through LDAP and LDAPS (SSL).
 == Description ==
-See <http://wordpress.org/extend/plugins/wpdirauth/>
-PLEASE NOTE
-Beta testers of the 1.7.X branch prior to version 1.7.5, you will need to
-deactivate wpdirauth before you updgrade to this latest version. Once you
-have installed and network activated the plugin, it will copy your options
-from their previous location to the sitemeta table. You will only need to 
-do this once. This will also work for anyone who was using the 1.6.X 
-branch or older and plans on using it in MULTISITE mode.
-Version 1.7.5 brings full MULTISITE support.
+Please see changelog below for recent updates/changes.
+
 wpDirAuth allows users of central directory (LDAP) servers to login to
 authorized WordPress instances without having to register. The plugin creates
 a new account for each directory user on first login so that they have full
@@ -25,6 +18,7 @@ public registration in WordPress. You can also assign any privilege levels to
 your directory users, and the those users will be referred to their
 institutional password policy whenever they would normally able to update 
 their WP passwords (on the profile screen, in user edit, etc).
+
 = LDAP/LDAPS =
 Authentication should work with most LDAP enabled directory services, such as
 OpenLDAP, Apache Directory, Microsoft Active Directory, Novell eDirectory,
@@ -39,6 +33,7 @@ you can define your own through the wpDirAuth administration tool.
 When logging in as a directory user, the WP "remember me" feature is downgraded
 from 6 months for regular WP users to only 1 hour, so that institutional
 passwords are not overly endangered when accessing WP from public terminals.
+
 = Branding & Notifications =
 You can define notifications addressed to your directory users in key WordPress
 areas, such as the login screen and the profile edit screen.
@@ -51,11 +46,13 @@ for directory users, which will simply record a one-time acceptance date when
 agreed upon. Note that agreeing to the TOS has no effect on the user's level of
 access in the system, fact which could change in future version if there is a
 demand for it, or through direct code contribution to that effect.
+
 == Download ==
 You can download the latest stable version of wpDirAuth from the WordPress
 Plugin Finder at the following locations:
 * Direct download: <http://downloads.wordpress.org/plugin/wpdirauth.zip>
 * WPPF home: <http://wordpress.org/extend/plugins/wpdirauth/>
+
 == Installation ==
 Installing should be a piece of cake and take fewer than ten minutes, provided
 you know your directory server(s) information, and that your blog is allowed to
@@ -79,11 +76,15 @@ See the inline help found in the tool for more information on the settings.
 There is a secondary activation toggle, so you can install and activate the
 plugin, check out the options panel, but not immediately accept directory
 authentication, or even simply turn the feature on or off at any time.
+
 == Help and Support ==
 Please post questions, request for help to the Wordpress plugins forum or 
 email <wpdirauth@gilzow.com>. Please be sure to include 'wpdirauth' in the
 subject line.
+
 == TO-DO's ==
+Tons. The entire codebase could stand refactoring.
+
 == Source and Development ==
 wpDirAuth welcomes friendly contributors wanting to lend a hand, be it in
 the form of code through SVN patches, user support, platform portability
@@ -140,10 +141,15 @@ In other words, a classic case of `pimp my lib'` (hopefully for the better).
 * Original: wpLDAP: <http://ashay.org/?page_id=133>
 * wpLDAP Patch: <http://www.pkrinternet.com/~rbulling/private/wpLDAP-1.02-ssl.patch>
 == Changelog ==
-PLEASE NOTE Beta testers of the 1.7.X branch prior to version 1.7.5, you will need to deactivate wpdirauth before you updgrade to this latest version. Once you have installed and network activated the plugin, it will copy your options from their previous location to the sitemeta table. You will only need to do this once. This will also work for anyone who was using the 1.6.X branch or older and plans on using it in MULTISITE mode.
+= 1.7.9 =
+* The plugin no longer automatically creates accounts for directory-authenticated users who log into the site.  You can enable this behavior in the plugin settings, but it is no longer the default behavior.
+* Not sure why but I never set the plugin up to block Directory-Authenticated users from attempting to use the wordpress builtin password reset tool.  It can't actually change the password, but it definitely caused confusion among users.  wpDirAuth now blocks directory-authenticated users from using the password reset tool.
+* Removed a bunch of deprecated function calls.
+* Cleaned up some of the debugging messages.
 = 1.7.6 =
 Corrected situation where a new authenticated user logging into a child site in a multisite network was added to the parent site, instead of the child site where they initiated the login. Also, somewhere along the way, I reintroduced a bug that when using authentication groups, the plugin would fail to redirect a successfully logged in user.
 = 1.7.5 =
+* PLEASE NOTE Beta testers of the 1.7.X branch prior to version 1.7.5, you will need to deactivate wpdirauth before you updgrade to this latest version. Once you have installed and network activated the plugin, it will copy your options from their previous location to the sitemeta table. You will only need to do this once. This will also work for anyone who was using the 1.6.X branch or older and plans on using it in MULTISITE mode.
 * MULTISITE support, bug fixes, security enhancements
 = 1.6.1 = 
 * Corrected a bug that would prevent user profiles from successfully being found. Thanks go to jgiangrande for identifying the problem area.
